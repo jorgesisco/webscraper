@@ -2,14 +2,14 @@ import requests
 from bs4 import BeautifulSoup
 
 
-for page in range(1, 388): #Loop para que el codigo se repita pagina por pagina!
-
+for page in range(1, 388): #Loop evvery single page!
+                                                 # Here /Company Category/
     page_listing = requests.get(f'https://www.biospace.com/employers/pharmaceutical/{page}')
     soup_listing = BeautifulSoup(page_listing.content, 'html.parser')
 
     print(f'Getting page {page} data!.')
 
-    for i in range(0, 9):  #Looping cada pagina con info de la compañia!
+    for i in range(0, 9):  #Looping each page to get each company info
 
         #Getting company names!
         companies_1 = soup_listing.find(id='listing')
@@ -31,7 +31,7 @@ for page in range(1, 388): #Loop para que el codigo se repita pagina por pagina!
         # Getting company country
         try:
             com_country = com_page_soup.find(itemprop='addressCountry').get('content')
-        except AttributeError:
+        except AttributeError:   #In case there is no country info It will make an exception
             com_country = "No country"
             pass
 
